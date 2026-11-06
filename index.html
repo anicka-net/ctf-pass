@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Contoso CTF Winner Pass</title>
+  <style>
+    :root {
+      --font-sans: "Segoe UI Variable Text", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: "Cascadia Mono", "Consolas", "SFMono-Regular", Menlo, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-sans);
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #ffffff;
+      background: #1b1a19;
+      text-align: center;
+    }
+    body.theme-l1 {
+      background: radial-gradient(circle at 50% 15%, #16944b 0%, #107c41 48%, #074723 100%);
+    }
+    body.theme-l2 {
+      background: radial-gradient(circle at 50% 15%, #7438b5 0%, #5c2d91 48%, #2b114a 100%);
+    }
+    body.theme-invalid {
+      background: radial-gradient(circle at 50% 15%, #a4262c 0%, #6e0811 100%);
+    }
+    .pass-card {
+      width: 100%;
+      max-width: 420px;
+      background: rgba(255, 255, 255, 0.10);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 2px solid rgba(255, 255, 255, 0.28);
+      border-radius: 20px;
+      padding: 28px 22px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+    .theme-l2 .pass-card {
+      border-color: #ffb900;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), 0 0 0 2px rgba(255, 185, 0, 0.35);
+    }
+    .org-pill {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.25);
+      margin-bottom: 16px;
+    }
+    .theme-l2 .org-pill {
+      background: rgba(255, 185, 0, 0.22);
+      color: #ffe082;
+      border: 1px solid rgba(255, 185, 0, 0.55);
+    }
+    .badge-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 14px;
+      background: #ffffff;
+      color: #107c41;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+    }
+    .theme-l2 .badge-icon {
+      background: linear-gradient(135deg, #ffd75e 0%, #ffb900 100%);
+      color: #2b114a;
+    }
+    .theme-invalid .badge-icon {
+      background: #ffffff;
+      color: #a4262c;
+    }
+    .level-title {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+    .theme-l2 .level-title {
+      color: #ffd75e;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+    }
+    .subtitle {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.9;
+      margin-bottom: 22px;
+    }
+    .code-box {
+      background: #ffffff;
+      color: #111827;
+      border-radius: 14px;
+      padding: 18px 14px;
+      margin-bottom: 20px;
+      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.08);
+    }
+    .theme-l2 .code-box {
+      border: 2px solid #ffb900;
+    }
+    .code-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #6b7280;
+      margin-bottom: 6px;
+    }
+    .claim-code {
+      font-family: var(--font-mono);
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: #0b5a2e;
+      word-break: break-all;
+    }
+    .theme-l2 .claim-code {
+      color: #461d73;
+    }
+    .steps {
+      text-align: left;
+      background: rgba(0, 0, 0, 0.22);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    .steps ol {
+      padding-left: 18px;
+    }
+    .steps li + li {
+      margin-top: 6px;
+    }
+    .sig-footer {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      opacity: 0.85;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4ade80;
+      display: inline-block;
+      box-shadow: 0 0 8px #4ade80;
+    }
+  </style>
+</head>
+<body>
+  <div class="pass-card" id="card">
+    <div class="org-pill" id="orgPill">UPDATE CONFERENCE PRAGUE · AI SECURITY CTF</div>
+    <div class="badge-icon" id="badgeIcon">✓</div>
+    <div class="level-title" id="levelTitle">VERIFYING PASS...</div>
+    <div class="subtitle" id="subtitle">CONTOSO SERVICE DESK</div>
+
+    <div class="code-box" id="codeBox">
+      <div class="code-label">RAFFLE CLAIM CODE</div>
+      <div class="claim-code" id="claimCode">---</div>
+    </div>
+
+    <div class="steps" id="stepsBox">
+      <ol>
+        <li>Show this screen to the booth staff.</li>
+        <li>Write your <strong>Raffle Claim Code</strong> above on a paper raffle slip and drop it in the box!</li>
+      </ol>
+    </div>
+
+    <div class="sig-footer" id="sigFooter"></div>
+  </div>
+
+  <script>
+    // Pure-JS SHA-256 + HMAC-SHA256 so signature verification works offline and on any HTTP/HTTPS origin
+    function sha256Bytes(asciiBytes) {
+      const K = [
+        0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
+        0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
+        0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,
+        0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,
+        0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,
+        0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,
+        0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,
+        0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2
+      ];
+      const H = [0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
+      const l = asciiBytes.length;
+      const bitLen = l * 8;
+      const padLen = ((l + 9 + 63) >> 6) << 6;
+      const buf = new Uint8Array(padLen);
+      buf.set(asciiBytes);
+      buf[l] = 0x80;
+      const dv = new DataView(buf.buffer);
+      dv.setUint32(padLen - 4, bitLen >>> 0, false);
+      const W = new Uint32Array(64);
+      const rotr = (n, x) => (x >>> n) | (x << (32 - n));
+
+      for (let off = 0; off < padLen; off += 64) {
+        for (let i = 0; i < 16; i++) W[i] = dv.getUint32(off + i * 4, false);
+        for (let i = 16; i < 64; i++) {
+          const s0 = rotr(7, W[i - 15]) ^ rotr(18, W[i - 15]) ^ (W[i - 15] >>> 3);
+          const s1 = rotr(17, W[i - 2]) ^ rotr(19, W[i - 2]) ^ (W[i - 2] >>> 10);
+          W[i] = (W[i - 16] + s0 + W[i - 7] + s1) >>> 0;
+        }
+        let [a, b, c, d, e, f, g, h] = H;
+        for (let i = 0; i < 64; i++) {
+          const S1 = rotr(6, e) ^ rotr(11, e) ^ rotr(25, e);
+          const ch = (e & f) ^ (~e & g);
+          const temp1 = (h + S1 + ch + K[i] + W[i]) >>> 0;
+          const S0 = rotr(2, a) ^ rotr(13, a) ^ rotr(22, a);
+          const maj = (a & b) ^ (a & c) ^ (b & c);
+          const temp2 = (S0 + maj) >>> 0;
+          h = g; g = f; f = e; e = (d + temp1) >>> 0;
+          d = c; c = b; b = a; a = (temp1 + temp2) >>> 0;
+        }
+        H[0] = (H[0] + a) >>> 0; H[1] = (H[1] + b) >>> 0; H[2] = (H[2] + c) >>> 0; H[3] = (H[3] + d) >>> 0;
+        H[4] = (H[4] + e) >>> 0; H[5] = (H[5] + f) >>> 0; H[6] = (H[6] + g) >>> 0; H[7] = (H[7] + h) >>> 0;
+      }
+      const out = new Uint8Array(32);
+      const outDv = new DataView(out.buffer);
+      for (let i = 0; i < 8; i++) outDv.setUint32(i * 4, H[i], false);
+      return out;
+    }
+
+    function hmacSha256Hex8(keyStr, messageStr) {
+      const enc = new TextEncoder();
+      let keyBytes = enc.encode(keyStr);
+      if (keyBytes.length > 64) keyBytes = sha256Bytes(keyBytes);
+      const kPad = new Uint8Array(64);
+      kPad.set(keyBytes);
+      const ipad = new Uint8Array(64);
+      const opad = new Uint8Array(64);
+      for (let i = 0; i < 64; i++) {
+        ipad[i] = kPad[i] ^ 0x36;
+        opad[i] = kPad[i] ^ 0x5c;
+      }
+      const msgBytes = enc.encode(messageStr);
+      const innerInput = new Uint8Array(64 + msgBytes.length);
+      innerInput.set(ipad);
+      innerInput.set(msgBytes, 64);
+      const innerHash = sha256Bytes(innerInput);
+
+      const outerInput = new Uint8Array(64 + 32);
+      outerInput.set(opad);
+      outerInput.set(innerHash, 64);
+      const mac = sha256Bytes(outerInput);
+      return Array.from(mac.slice(0, 4)).map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    (function renderPass() {
+      const params = new URLSearchParams(window.location.search);
+      const lvl = (params.get("lvl") || "").trim();
+      const rawCode = (params.get("code") || "").trim().toUpperCase();
+      const sig = (params.get("sig") || "").trim().toLowerCase();
+
+      const key = "CONTOSO-CTF-2026-PRAGUE-BOOTH-KEY-9941";
+      const expectedPrefix = lvl === "1" ? "L1-" : (lvl === "2" ? "L2-" : "INVALID");
+      const expectedSig = hmacSha256Hex8(key, `v1|lvl=${lvl}|code=${rawCode}`);
+      const isValid = (lvl === "1" || lvl === "2") &&
+                      rawCode.startsWith(expectedPrefix) &&
+                      /^[A-Z0-9\-]{8,24}$/.test(rawCode) &&
+                      sig.length === 8 &&
+                      sig === expectedSig;
+
+      const body = document.body;
+      const badgeIcon = document.getElementById("badgeIcon");
+      const levelTitle = document.getElementById("levelTitle");
+      const subtitle = document.getElementById("subtitle");
+      const claimCode = document.getElementById("claimCode");
+      const stepsBox = document.getElementById("stepsBox");
+      const sigFooter = document.getElementById("sigFooter");
+
+      if (!isValid) {
+        body.className = "theme-invalid";
+        badgeIcon.textContent = "✕";
+        levelTitle.textContent = "INVALID WINNER PASS";
+        subtitle.textContent = "SIGNATURE VERIFICATION FAILED";
+        claimCode.textContent = "UNVERIFIED";
+        claimCode.style.color = "#a4262c";
+        stepsBox.innerHTML = "<p>This pass URL is incomplete or its cryptographic signature does not match the level and claim code. Please scan the QR code directly from the Contoso Service Desk kiosk screen.</p>";
+        sigFooter.textContent = "STATUS: TAMPER CHECK FAILED";
+        return;
+      }
+
+      if (lvl === "1") {
+        body.className = "theme-l1";
+        badgeIcon.textContent = "✓";
+        levelTitle.textContent = "LEVEL 1 CLEARED";
+        subtitle.textContent = "CONTOSO SUPPORT TRIAGE";
+      } else {
+        body.className = "theme-l2";
+        badgeIcon.textContent = "★";
+        levelTitle.textContent = "LEVEL 2 MASTER ★";
+        subtitle.textContent = "CONTOSO INCIDENT PORTAL";
+      }
+
+      claimCode.textContent = rawCode;
+      sigFooter.innerHTML = `<span class="pulse-dot"></span> VERIFIED PASS · SIG ${sig.toUpperCase()}`;
+    })();
+  </script>
+</body>
+</html>
